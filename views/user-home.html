@@ -1,0 +1,61 @@
+<html>
+	<head>
+        <link rel="stylesheet" href="../views.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--Import Font-->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+            <!--Import Icons-->
+            <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+            
+        <style>
+            body, html {
+            background-color: #0e0f12;
+        }
+        </style>
+	</head>
+    <body>
+        <div class="container">
+            <div class="content-wrapper">
+            <div id="loggedInUserDisplay"></div>
+            <div style="margin-top: 20px;"></div>
+            
+            <div>
+                <h2 style="text-align: center;" >Agile Project Management</h2>
+                <div class="btn-wrapper-center">
+                    <button class="btn-primary" onclick="window.location.href='./user-details.html'">User Details</button>
+                </div>
+                <div style="margin-top: 10px;"></div>
+                <h5 style="text-align: center;">Sprint Management</h5>
+                <div class="btn-wrapper-center">
+                    <button class="btn-primary" onclick="window.location.href='./create-sprint.html'">Create Sprint</button>
+                    <button class="btn-primary" onclick="window.location.href='./sprint-view.html'">View Sprints</button>
+                    <button class="btn-primary" onclick="window.location.href='./archived-sprint.html'">View Archived Sprints</button>
+                </div>
+            </div>
+
+            <div>
+                <div style="margin-top: 10px;"></div>
+                <h5 style="text-align: center;">Task Management</h5>
+                <div class="btn-wrapper-center">
+                    <button class="btn-primary" onclick="window.location.href='./product-backlog.html'">View Product Backlog</button>
+                    <button class="btn-primary" onclick="window.location.href='./create-task.html'">Add Task</button>
+                </div>
+
+            </div>
+        </div>
+        <footer>
+            <div class="btn-wrapper-center">
+            <button class="btn-primary" onclick="window.location.href='./login.html'">Log Out</button>
+            </div>
+        </div>
+        </div>
+        <script src="../js/shared.js"></script> 
+        <script src="../js/user.js"></script>
+        <script src="app.js"></script> 
+        <script src="createTask.js"></script>
+    </body>
+</html>

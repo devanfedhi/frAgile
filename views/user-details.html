@@ -1,0 +1,72 @@
+<head>
+    <!-- <link href="bootstrap.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../views.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+        <!--Import Icons-->
+        <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+        
+        <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body class="with-sidebar single-line">
+    <div class="container-full">
+
+        <nav class="sidebar">
+            <div class="icon-border selected-icon">
+                <i class="fa-solid fa-user" title="View Profile" onclick="window.location.href='./user-details.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-solid fa-layer-group" title="Product Backlog" onclick="window.location.href='./product-backlog.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-regular fa-calendar" title="Sprint View" onclick="window.location.href='./sprint-view.html'"></i>
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket" title="Log Out" onclick="window.location.href='./login.html'" style="margin-top: auto;"></i>
+        </nav>
+
+    <div class="container-top">
+    <h1>Your User Information</h1>
+    </div>
+    <div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody id="userList">
+        </tbody>
+    </table>
+    </div>
+
+    <div id="edit-user-form">
+        <h2>Change Password</h2>
+        <form style="text-align: left;">
+
+            <input type="password" id="edit-password" name="edit-password" placeholder="New Password:" required>
+            
+            <button type="button" class="btn-primary" onclick="edit()">Save Changes</button>
+        </form>
+    </div>
+    <script src="../js/userDetails.js"></script>
+    <script src="../js/editUserDetails.js"></script>
+    <div>
+
+</body>
+</html>

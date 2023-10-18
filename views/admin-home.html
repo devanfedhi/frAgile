@@ -1,0 +1,51 @@
+<html>
+	<head>
+        <link rel="stylesheet" href="../views.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--Import Font-->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+            <!--Import Icons-->
+            <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+            
+        <style>
+            body, html {
+            background-color: #0e0f12;
+        }
+        </style>
+	</head>
+    <body>
+        <div class="container">
+            <div class="content-wrapper">
+            <div id="loggedInUserDisplay"></div>
+            <div style="margin-top: 20px;"></div>
+            
+            <div>
+                <h2 style="text-align: center;" >Admin Panel</h2>
+                <div class="btn-wrapper-center">
+                    <button class="btn-primary" onclick="window.location.href='./admin-details.html'">User Management</button>
+                </div>
+                <div style="margin-top: 10px;"></div>
+                <h5 style="text-align: center;">Admin Views</h5>
+                <div class="btn-wrapper-center">
+                    <button class="btn-primary" onclick="window.location.href='./admin-home.html'">Dashboard View</button>
+                    <button class="btn-primary" onclick="window.location.href='./admin-home.html'">User Statistics Views</button>
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            <div class="btn-wrapper-center">
+            <button class="btn-primary" onclick="window.location.href='./login.html'">Log Out</button>
+            </div>
+        </div>
+        </div>
+        <script src="./js/shared.js"></script> 
+        <script src="./js/user.js"></script>
+        <script src="app.js"></script> 
+        <script src="createTask.js"></script>
+    </body>
+</html>

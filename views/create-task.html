@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../views.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!--Import Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+		<!--Import Icons-->
+		<script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+		
+		<title>Create Task</title>
+</head>
+<body>
+  <div class="container">
+	<div class="content-wrapper">
+		<!--Task Name-->
+    <h1><input id="taskName" type="text" name="taskName" placeholder="Task name" ></h1>
+    
+		<!--Task Description-->
+		<textarea rows="5" id="taskDescription" placeholder="enter description" ></textarea>
+    
+		<table class="resizing">
+			<!--Type Select-->
+			<tr id="type"></tr>
+			<tr>
+				<th>type:</th>
+				
+				<td>
+					<input name="taskType" id="STORY" type="radio" value="STORY" checked="checked">
+					<label for="STORY">STORY</label>
+                    
+					<input name="taskType" id="BUG" type="radio" value="BUG">
+					<label for="BUG">BUG</label>
+				</td>
+			</tr>
+			
+			<!--Tag Multi-Select-->
+			<tr id="tags"></tr>
+			<tr>
+				<th>tags:</th>
+				
+				<td>
+					<input name="taskTag" id="frontend" type="checkbox" value="frontend">
+					<label for="frontend" class="tags">#frontend</label>
+					
+					<input name="taskTag" id="backend" type="checkbox" value="backend">
+					<label for="backend" class="tags">#backend</label>
+					
+					<input name="taskTag" id="api" type="checkbox" value="api">
+					<label for="api" class="tags">#API</label>
+					
+					<input name="taskTag" id="database" type="checkbox" value="database">
+					<label for="database" class="tags">#database</label>
+					
+					<input name="taskTag" id="framework" type="checkbox" value="framework">
+					<label for="framework" class="tags">#framework</label>
+					
+					<input name="taskTag" id="testing" type="checkbox" value="testing">
+					<label for="testing" class="tags">#testing</label>
+					
+					<input name="taskTag" id="ui" type="checkbox" value="ui">
+					<label for="ui" class="tags">#UI</label>
+					
+					<input name="taskTag" id="ux" type="checkbox" value="ux">
+					<label for="ux" class="tags">#UX</label>
+				</td>
+			</tr>
+
+			<!--Priority Select-->
+			<tr id="priority"></tr>
+			<tr>
+				<th>priority:</th>
+				
+				<td>
+					
+					<input name="taskPriority" id="low" type="radio" value="LOW" checked="checked">
+          			<label for="low">LOW</label>
+                    
+					<input name="taskPriority" id="medium" type="radio" value="MEDIUM">
+					<label for="medium">MEDIUM</label>
+
+					<input name="taskPriority" id="important" type="radio" value="IMPORTANT">
+					<label for="important">IMPORTANT</label>
+
+					<input name="taskPriority" id="urgent" type="radio" value="URGENT">
+					<label for="urgent">URGENT</label>
+				</td>
+			</tr>
+
+			<!--Story Point Slider-->
+			<tr id="storyPoints"></tr>
+			<tr>
+				<th><label for="storyPoints">story points:</label></th>
+
+				<td>
+					<div class="storyPointsBG">
+						<div style="position: relative;">
+							<div class="sliderTrack">&nbsp</div>
+							<input type="range" min="0" max="10" step="1" name="storyPoints" id="storyPointsSlider" oninput="displayVal(this.value)">
+						</div>
+						<div class="storyPointsNum">
+							<output class="sliderValue">5</output>
+						</div>
+					</div>
+				</td>
+			</tr>
+			
+		</table>
+	
+		<div id="modal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-body" id="modal-body">
+				<div class="modal-text" id="modal-text"></div>		
+				<span class="close"><i class="fa-solid fa-xmark"></i></span>
+			</div>
+		</div> 
+	</div>
+		<footer class="buttonContainer" id="modal">
+			<!--Submit/Cancel Buttons-->
+			<button class="btn-primary" onclick="createTask()">
+				<i class="fa-solid fa-check"></i>
+			</button>
+			
+			<button onclick="history.back()" class="btn-destructive">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+			
+		</footer>
+	</div>
+		<script src="../js/createTask.js"></script> 
+		<script src="../js/shared.js"></script> 
+	</body>
+</html>

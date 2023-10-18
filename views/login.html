@@ -1,0 +1,50 @@
+<head>
+    <!-- <link href="bootstrap.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../views.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+        <!--Import Icons-->
+        <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+        
+        <title>Login</title>
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <style>
+        body, html {
+            background-color: #0e0f12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="content-wrapper">
+    <div id="login-form">
+        <h2>Login</h2>
+        <form id="loginForm" style="text-align: left">
+                <label for="login-username">Username:</label>
+                <input type="text" class="rounded-textbox" id="login-username" name="login-username" required>
+                
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                
+                <button type="button" class="btn-primary" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div></div>
+    <div id="verify-form-login" style="text-align: left">
+        <label for="login-code">Code:</label>
+        <input type="text" id="login-code" name="login-code" required>
+        <button type="button" class="btn-primary" onclick="verifyCodeLogin()">Verify</button>
+    </div>
+
+    <div id="output"></div>
+    </div>
+    <script src="../js/login.js"></script>
+</body>
+</html>
+

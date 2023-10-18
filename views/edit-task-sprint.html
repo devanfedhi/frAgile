@@ -1,0 +1,159 @@
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		 <link rel="stylesheet" href="../views.css">
+		 		<!--Import Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+		<!--Import Icons-->
+		<script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+		
+		<title>Edit task</title>
+</head>
+<body>
+	<div class="container">
+	<div class="content-wrapper">
+		<h1><input class="taskName" id="taskName" type="text" name="taskName" placeholder="Untitled" ></h1>
+			<!--Task Description-->
+			<textarea rows="5" id="taskDescription" placeholder="enter description" ></textarea>
+	
+			<table class="resizing">
+				<!--Type Select-->
+				<tr id="type"></tr>
+				<tr>
+					<th>type:</th>
+					<td>
+						<input name="taskType" id="story" type="radio" value="STORY" checked="checked">
+						<label for="story">STORY</label>
+						
+						<input name="taskType" id="bug" type="radio" value="BUG">
+						<label for="bug">BUG</label>
+					</td>
+				</tr>
+		
+				<!--Tag Multi-Select-->
+				<tr id="tags"></tr>
+				<tr>
+					<th>tags:</th>
+					<td>
+						<input name="taskTag" id="frontend" type="checkbox" value="frontend">
+						<label for="frontend" class="tags">#frontend</label>
+						
+						<input name="taskTag" id="backend" type="checkbox" value="backend">
+						<label for="backend" class="tags">#backend</label>
+						
+						<input name="taskTag" id="api" type="checkbox" value="api">
+						<label for="api" class="tags">#API</label>
+						
+						<input name="taskTag" id="database" type="checkbox" value="database">
+						<label for="database" class="tags">#database</label>
+						
+						<input name="taskTag" id="framework" type="checkbox" value="framework">
+						<label for="framework" class="tags">#framework</label>
+						
+						<input name="taskTag" id="testing" type="checkbox" value="testing">
+						<label for="testing" class="tags">#testing</label>
+						
+						<input name="taskTag" id="ui" type="checkbox" value="ui">
+						<label for="ui" class="tags">#UI</label>
+						
+						<input name="taskTag" id="ux" type="checkbox" value="ux">
+						<label for="ux" class="tags">#UX</label>
+					</td>
+				</tr>
+
+				<!--Priority Select-->
+				<tr id="priority"></tr>
+				<tr>
+					<th>priority:</th>
+					
+					<td>
+						
+						<input name="taskPriority" id="low" type="radio" value="LOW" checked="checked">
+						<label for="low">LOW</label>
+						
+						<input name="taskPriority" id="medium" type="radio" value="MEDIUM">
+						<label for="medium">MEDIUM</label>
+
+						<input name="taskPriority" id="important" type="radio" value="IMPORTANT">
+						<label for="important">IMPORTANT</label>
+
+						<input name="taskPriority" id="urgent" type="radio" value="URGENT">
+						<label for="urgent">URGENT</label>
+					</td>
+				</tr>
+
+				<!--Production Stage-->
+				<tr id="production"></tr>
+				<tr>
+					<th>production:</th>
+					
+					<td>
+						<input name="taskProductionStage" id="planningStage" type="radio" value="PLANNING" checked="checked">
+							<label for="planningStage">PLANNING</label>
+						
+						<input name="taskProductionStage" id="developementStage" type="radio" value="DEVELOPMENT">
+						<label for="developementStage">DEVELOPMENT</label>
+
+						<input name="taskProductionStage" id="testingStage" type="radio" value="TESTING">
+						<label for="testingStage">TESTING</label>
+
+						<input name="taskProductionStage" id="integrationStage" type="radio" value="INTEGRATION">
+						<label for="integrationStage">INTEGRATION</label>
+					</td>
+				</tr>
+
+				<!--Assignee Select-->
+				<tr id="assignee"></tr>
+				<tr>
+					<th><label for="assignee">assignee:</label></th>
+					
+					<td>
+						<input class="dropdown" list="team" id="assignee" placeholder="enter name"></input>
+						<datalist id="team">
+							<option value="Tye Samuels">Tye Samuels</option> 
+							<option value="Audrey">Audrey</option> 
+							<!-- Need to add js to generate list of team members -->
+						</datalist>
+					</td>
+				</tr>
+
+				<!--Story Point Slider-->
+				<tr>
+					<th><label for="storyPoints">story points:</label></th>
+
+					<td>
+						<input type="range" min="0" max="10" step="1" name="storyPoints" id="storyPointsSlider" oninput="this.nextElementSibling.value = this.value">
+						<output id="storyPoints">None</output>
+					</td>
+				</tr>		
+			</table>
+
+		<div id="modal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-body" id="modal-body">
+				<div class="modal-text" id="modal-text"></div>		
+				<span class="close"><i class="fa-solid fa-xmark"></i></span>
+			</div>
+		</div>
+	</div>
+		<footer id="modal">
+			<!--Submit/Cancel Buttons-->
+			<button class="buttonContainer">
+				<i class="fa-solid fa-check" onclick="saveEditTask()"></i>
+			</button>
+			
+			<button onclick="history.back()" class="buttonContainer">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+
+		</footer>
+
+		</div>
+		<script src="../js/editTask.js"></script> 
+		<script src="../js/shared.js"></script> 
+	</body>
+</html>

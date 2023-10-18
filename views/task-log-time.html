@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		 <link rel="stylesheet" href="../views.css">
+		 		<!--Import Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+		<!--Import Icons-->
+		<script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+		
+		<title>Edit task</title>
+</head>
+<body>
+	<div class="container">
+	<div class="content-wrapper">
+		<h1><input id="taskName" type="text" name="taskName" placeholder="Untitled" disabled></h1>
+			<table class="resizing">
+				<!--Assignee Select-->
+				<tr id="assignee"></tr>
+				<tr>
+					<th><label for="assignee">assignee:</label></th>
+					
+					<td>
+						<input class="dropdown" list="team" id="assignee" placeholder="enter name"></input>
+						<datalist id="team">
+							<option value="Tye Samuels">Tye Samuels</option> 
+							<option value="Audrey">Audrey</option> 
+							<!-- Need to add js to generate list of team members -->
+						</datalist>
+					</td>
+				</tr>
+                
+                <!--EndDate-->
+                <tr id="endTaskDate"></tr>
+                <tr>
+                <th>End Date:</th>
+                <td>
+                    <input type="date" id="endTaskDateInput" name="endTaskDate">
+                </td>
+                </tr>	
+                
+                <tr id="timeSpent"></tr>
+                <tr>
+                <th>Time Spent (hours):</th>
+                <td>
+                    <input type="number" id="timeSpentInput" name="timeSpent">
+                </td>
+                </tr>		
+                </table>
+	</div>
+		<footer id="modal">
+			<!--Submit/Cancel Buttons-->
+			<button class="buttonContainer">
+				<i class="fa-solid fa-check" onclick="saveEditTask(`./sprint-backlog.html`)"></i>
+			</button>
+			
+			<button onclick="history.back()" class="buttonContainer">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+		</footer>
+
+		</div>
+		<script src="../js/taskLogTime.js"></script> 
+		<script src="../js/editTask.js"></script> 
+		<script src="../js/shared.js"></script> 
+	</body>
+</html>

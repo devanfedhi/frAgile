@@ -1,0 +1,267 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../views.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+        <!--Import Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     
+        <!--Import Icons-->
+		<script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+		
+     <style>
+        body, html {
+            background-color: #0e0f12;
+        }
+    </style>
+    <title>
+        Sprint backlog
+    </title>
+</head>
+<body class="with-sidebar">
+    <div class="container-full">
+
+        <nav class="sidebar">
+            <div class="icon-border">
+                <i class="fa-solid fa-user" title="View Profile" onclick="window.location.href='./user-details.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-solid fa-layer-group" title="Product Backlog" onclick="window.location.href='./product-backlog.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-regular fa-calendar" title="Sprint View" onclick="window.location.href='./sprint-view.html'"></i>
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket" title="Log Out" onclick="window.location.href='./login.html'" style="margin-top: auto;"></i>
+        </nav>
+        
+        <div class="container-top">
+        <div class="topnav">
+            <h1 id="sprint-backlog-title">Sprint Backlog</h1>
+                <!-- Rounded switch -->
+            <div class="topnav-right">
+                <div id="display-mode-label">List View</div>
+                <label class="switch">
+                    <input type="checkbox" id="display-mode" onchange="viewTypeChange()">
+                    <div class="slider">
+                    </div>
+                </label>
+            </div> 
+        </div>
+        </div> 
+
+        <div id="list-view">
+            <label for="sort" style="display: inline-block; margin-right: 100px;"></label> 
+            <select class="sort" name="sortOptions" id="list_sort_options" onchange="sortForList()"> 
+                <option value="" selected disabled>Sort by</option>
+                <option value="priorityHighest">Highest Priority</option> 
+                <option value="priorityLowest">Lowest Priority</option> 
+                <option value="completionStage">Completion Stage</option> 
+            </select>
+            <div style="overflow-x: scroll;">
+                <div class="table-wrapper">   
+                    <div class="rows" id="list"></div>
+                    <div class="title-divider"><h2>Not Started</h2><hr></div>
+                    <div class = "rows" id="list_not_started"></div>
+                    <div class="title-divider"><h2>In Progress</h2><hr></div>
+                    <div class = "rows" id="list_in_progress"></div>
+                    <div class="title-divider"><h2>Completed</h2><hr></div>
+                    <div class = "rows" id="list_completed"></div>
+                </div>
+            </div>
+        </div> 
+    
+        <div id="kanban-view">
+            <label for="sort" style="display: inline-block; margin-right: 100px;"></label> 
+            <select class="sort" name="sortOptions" id="kanban_sort_options" onchange="sortForKanban()"> 
+                <option value="" selected disabled>Sort by</option>
+                <option value="priorityHighest">Highest Priority</option> 
+                <option value="priorityLowest">Lowest Priority</option> 
+            </select>
+            <div style="overflow-x: scroll;">
+                <div class="table-wrapper"> 
+                    <div class="kanban">
+                        <div class="title-divider"><h2>Not Started</h2><hr></div>
+                        <div class = "rows" id="kanban_not_started"></div>
+                    </div>
+                    <div class="kanban">
+                    <div class="title-divider"><h2>In Progress</h2><hr></div>
+                    <div class = "rows" id="kanban_in_progress"></div>
+                    </div>
+                    <div class="kanban">
+                    <div class="title-divider"><h2>Completed</h2><hr></div>
+                    <div class = "rows" id="kanban_completed"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDIT TASK MODAL -->
+	<div id="editTaskModal" class="modal">
+		<div class="container">
+			<div class="content-wrapper">
+				<!--Task Name-->
+				<h1><input id="edit-taskName" class="taskName" type="text" name="edit-taskName" placeholder="Task Name"></h1>
+			
+				<!--Task Description-->
+				<textarea rows="5" id="edit-taskDescription" placeholder="enter description" ></textarea>
+			
+				<table class="resizing">
+					<!--Type Select-->
+					<tr id="type"></tr>
+					<tr><th>type:</th>
+						<td>
+							<input name="edit-taskType" id="edit-STORY" type="radio" value="STORY" checked="checked">
+							<label for="edit-STORY">STORY</label>
+							
+							<input name="edit-taskType" id="edit-BUG" type="radio" value="BUG">
+							<label for="edit-BUG">BUG</label>
+						</td>
+					</tr>
+					
+					<!--Tag Multi-Select-->
+					<tr id="tags"></tr>
+					<tr><th>tags:</th>
+						<td>
+							<input name="edit-taskTag" id="edit-frontend" class="frontend" type="checkbox" value="frontend">
+							<label for="edit-frontend" class="tags">#frontend</label>
+							
+							<input name="edit-taskTag" id="edit-backend" class="backend" type="checkbox" value="backend">
+							<label for="edit-backend" class="tags">#backend</label>
+							
+							<input name="edit-taskTag" id="edit-api" class="api" type="checkbox" value="api">
+							<label for="edit-api" class="tags">#API</label>
+							
+							<input name="edit-taskTag" id="edit-database" class="database" type="checkbox" value="database">
+							<label for="edit-database" class="tags">#database</label>
+							
+							<input name="edit-taskTag" id="edit-framework" class="framework" type="checkbox" value="framework">
+							<label for="edit-framework" class="tags">#framework</label>
+							
+							<input name="edit-taskTag" id="edit-testing" class="testing" type="checkbox" value="testing">
+							<label for="edit-testing" class="tags">#testing</label>
+							
+							<input name="edit-taskTag" id="edit-ui" class="ui" type="checkbox" value="ui">
+							<label for="edit-ui" class="tags">#UI</label>
+							
+							<input name="edit-taskTag" id="edit-ux" class="ux" type="checkbox" value="ux">
+							<label for="edit-ux" class="tags">#UX</label>
+						</td>
+					</tr>
+
+					<!--Priority Select-->
+					<tr id="priority"></tr>
+					<tr><th>priority:</th>
+						<td>
+							<input name="edit-taskPriority" id="edit-LOW" class="low" type="radio" value="LOW" checked="checked">
+							<label for="edit-LOW">LOW</label>
+							
+							<input name="edit-taskPriority" id="edit-MEDIUM" class="medium" type="radio" value="MEDIUM">
+							<label for="edit-MEDIUM">MEDIUM</label>
+
+							<input name="edit-taskPriority" id="edit-IMPORTANT" class="important" type="radio" value="IMPORTANT">
+							<label for="edit-IMPORTANT">IMPORTANT</label>
+
+							<input name="edit-taskPriority" id="edit-URGENT" class="urgent" type="radio" value="URGENT">
+							<label for="edit-URGENT">URGENT</label>
+						</td>
+					</tr>
+					
+					<!-- Production Stage Select -->
+					<tr id="production"></tr>
+					<tr><th>production:</th>
+						<td>
+							<input name="edit-taskProductionStage" id="edit-PLANNING" type="radio" value="PLANNING" checked="checked">
+							<label for="edit-PLANNING">PLANNING</label>
+							
+							<input name="edit-taskProductionStage" id="edit-DEVELOPMENT" type="radio" value="DEVELOPMENT">
+							<label for="edit-DEVELOPMENT">DEVELOPMENT</label>
+	
+							<input name="edit-taskProductionStage" id="edit-TESTING" type="radio" value="TESTING">
+							<label for="edit-TESTING">TESTING</label>
+	
+							<input name="edit-taskProductionStage" id="edit-INTEGRATION" type="radio" value="INTEGRATION">
+							<label for="edit-INTEGRATION">INTEGRATION</label>
+						</td>
+					</tr>
+
+				<!--Assignee Select-->
+				<tr id="assignee"></tr>
+				<tr>
+					<th><label for="edit-assignee">assignee:</label></th>
+					
+					<td>
+						<input class="dropdown" list="team" id="edit-assignee" placeholder="enter name"></input>
+						<datalist id="team">
+							<option value="Tye">Tye</option> 
+							<option value="Audrey">Audrey</option>
+							<option value="Jun">Jun</option> 
+							<!-- TODO: Need to add js to generate list of team members -->
+						</datalist>
+					</td>
+				</tr>
+
+					<!--Story Point Slider-->
+					<tr id="storyPoints"></tr>
+					<tr><th><label for="edit-storyPointsSlider">story points:</label></th>
+						<td>
+							<div id="edit-slider" class="storyPointsBG">
+								<div class="sliderContainer">
+									<div class="sliderTrack">&nbsp</div>
+									<input type="range" min="0" max="10" step="1" name="edit-storyPoints" id="edit-storyPointsSlider" oninput="updateSlider(this.value, `edit-slider`)">
+								</div>
+								<div class="storyPointsNum">
+									<h5 class="sliderValue">5</h5>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+				<footer class="buttonContainer" id="modal">
+					<!--Submit/Cancel Buttons-->
+					<button class="icon-btn btn-primary" onclick="saveEditTask(`./product-backlog.html`)" title="Submit Edits">
+						<i class="fa-solid fa-check"></i>
+					</button>
+					
+					<button class="icon-btn btn-destructive" onclick="closeEditTaskModal()" title="Close">
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+				</footer>
+		</div>
+	</div>
+    
+        <div id="modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-body" id="modal-body">
+                <div class="modal-text" id="modal-text"></div>		
+                <div class="btn-wrapper-sml">
+                    <button type="button" class="btn-primary" style="font-size: 14px;" onclick="dismiss()">Cancel</button>
+                    <button type="button" class="btn-destructive" style="font-size: 14px;" onclick="confirmDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center;">
+        <!--Submit/Cancel Buttons-->
+        <div class="btn-wrapper">
+        <button class="btn-secondary" onclick="window.location.href='./sprint-view.html'">
+            Close
+        </button>
+        <button class="btn-secondary" onclick="window.location.href='./sprint-task-select.html'">
+            Select Tasks
+        </button>
+        </div>
+        </footer>
+
+        <script src="../js/createTask.js"></script> 
+        <script src="../js/sprintBacklog.js"></script>
+        <script src="../js/taskLogTime.js"></script> 
+        <script src="../js/editTask.js"></script> 
+        <script src="../js/shared.js"></script> 
+    </div>
+</body>
+</html>

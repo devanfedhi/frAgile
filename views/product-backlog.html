@@ -1,0 +1,303 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../views.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+        <!--Import Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     
+        <!--Import Icons-->
+		<script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+     <style>
+        body, html {
+            background-color: #0e0f12;
+        }
+    </style>
+    <title>Create task</title>
+</head>
+<body class="with-sidebar">
+    <div class="container-full">
+        <nav class="sidebar">
+            <div class="icon-border">
+                <i class="fa-solid fa-user" title="View Profile" onclick="window.location.href='./user-details.html'"></i>
+            </div>
+            <div class="icon-border selected-icon">
+                <i class="fa-solid fa-layer-group" title="Product Backlog" onclick="window.location.href='./product-details.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-regular fa-calendar" title="Sprint View" onclick="window.location.href='./sprint-view.html'"></i>
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket" title="Log Out" onclick="window.location.href='./login.html'" style="margin-top: auto;"></i>
+        </nav>
+        <div class="container-top">
+            <h1>Product Backlog</h1>
+
+            <div class="sort-wrapper">
+                <!--Gotta do some simple css for this-->
+                <select class="sort" name="sortOptions" id="sortOptions" onchange="sort()" style="margin: 4px 5px 4px 0;" title="Sort Tasks"> 
+                    <option value="" selected disabled>Sort by</option>
+                    <option value="default">Default</option>  
+                    <option value="priorityHighest">Highest Priority</option> 
+                    <option value="priorityLowest">Lowest Priority</option> 
+                </select>
+
+                <button class="icon-btn btn-primary" onclick="showCreateTaskModal()" title="New Task" style="margin-right: 0;">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
+            
+        <div class="wrapper">            
+            <div class="grid" id="taskID">
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE TASK MODAL -->
+    <div id="createTaskModal" class="modal">
+        <div class="container">
+            <div class="content-wrapper">
+                <!--Task Name-->
+                <h1><input id="taskName" class="taskName" type="text" name="taskName" placeholder="Task Name" ></h1>
+            
+                <!--Task Description-->
+                <textarea rows="5" id="taskDescription" placeholder="enter description" ></textarea>
+            
+                <table class="resizing">
+                    <!--Type Select-->
+                    <tr id="type"></tr>
+                    <tr><th>type:</th>
+                        <td>
+                            <input name="taskType" id="STORY" type="radio" value="STORY" checked="checked">
+                            <label for="STORY">STORY</label>
+                            
+                            <input name="taskType" id="BUG" type="radio" value="BUG">
+                            <label for="BUG">BUG</label>
+                        </td>
+                    </tr>
+                    
+                    <!--Tag Multi-Select-->
+                    <tr id="tags"></tr>
+                    <tr><th>tags:</th>
+                        <td>
+                            <input name="taskTag" id="frontend" class="frontend" type="checkbox" value="frontend">
+                            <label for="frontend" class="tags">#frontend</label>
+                            
+                            <input name="taskTag" id="backend" class="backend" type="checkbox" value="backend">
+                            <label for="backend" class="tags">#backend</label>
+                            
+                            <input name="taskTag" id="api" class="api" type="checkbox" value="api">
+                            <label for="api" class="tags">#API</label>
+                            
+                            <input name="taskTag" id="database" class="database" type="checkbox" value="database">
+                            <label for="database" class="tags">#database</label>
+                            
+                            <input name="taskTag" id="framework" class="framework" type="checkbox" value="framework">
+                            <label for="framework" class="tags">#framework</label>
+                            
+                            <input name="taskTag" id="testing" class="testing" type="checkbox" value="testing">
+                            <label for="testing" class="tags">#testing</label>
+                            
+                            <input name="taskTag" id="ui" class="ui" type="checkbox" value="ui">
+                            <label for="ui" class="tags">#UI</label>
+                            
+                            <input name="taskTag" id="ux" class="ux" type="checkbox" value="ux">
+                            <label for="ux" class="tags">#UX</label>
+                        </td>
+                    </tr>
+
+                    <!--Priority Select-->
+                    <tr id="priority"></tr>
+                    <tr><th>priority:</th>
+                        <td>
+                            <input name="taskPriority" id="LOW" class="low" type="radio" value="LOW" checked="checked">
+                            <label for="LOW">LOW</label>
+                            
+                            <input name="taskPriority" id="MEDIUM" class="medium" type="radio" value="MEDIUM">
+                            <label for="MEDIUM">MEDIUM</label>
+
+                            <input name="taskPriority" id="IMPORTANT" class="important" type="radio" value="IMPORTANT">
+                            <label for="IMPORTANT">IMPORTANT</label>
+
+                            <input name="taskPriority" id="URGENT" class="urgent" type="radio" value="URGENT">
+                            <label for="URGENT">URGENT</label>
+                        </td>
+                    </tr>
+
+                    <!--Story Point Slider-->
+                    <tr id="storyPoints"></tr>
+                    <tr><th><label for="storyPoints">story points:</label></th>
+                        <td>
+                            <div id="create-slider" class="storyPointsBG">
+                                <div class="sliderContainer">
+                                    <div class="sliderTrack">&nbsp</div>
+                                    <input type="range" min="0" max="10" step="1" name="storyPoints" id="storyPointsSlider" oninput="updateSlider(this.value, `create-slider`)">
+                                </div>
+                                <div class="storyPointsNum">
+                                    <h5 class="sliderValue">5</h5>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+                <footer class="buttonContainer" id="modal">
+                    <!--Submit/Cancel Buttons-->
+                    <button class="icon-btn btn-primary " onclick="createTask()" title="Create Task">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    
+                    <button class="icon-btn btn-destructive" onclick="closeCreateTaskModal()" title="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </footer>
+        </div>
+    </div>
+
+    <!-- EDIT TASK MODAL -->
+	<div id="editTaskModal" class="modal">
+		<div class="container">
+			<div class="content-wrapper">
+				<!--Task Name-->
+				<h1><input id="edit-taskName" class="taskName" type="text" name="edit-taskName" placeholder="Task Name"></h1>
+			
+				<!--Task Description-->
+				<textarea rows="5" id="edit-taskDescription" placeholder="enter description" ></textarea>
+			
+				<table class="resizing">
+					<!--Type Select-->
+					<tr id="type"></tr>
+					<tr><th>type:</th>
+						<td>
+							<input name="edit-taskType" id="edit-STORY" type="radio" value="STORY" checked="checked">
+							<label for="edit-STORY">STORY</label>
+							
+							<input name="edit-taskType" id="edit-BUG" type="radio" value="BUG">
+							<label for="edit-BUG">BUG</label>
+						</td>
+					</tr>
+					
+					<!--Tag Multi-Select-->
+					<tr id="tags"></tr>
+					<tr><th>tags:</th>
+						<td>
+							<input name="edit-taskTag" id="edit-frontend" class="frontend" type="checkbox" value="frontend">
+							<label for="edit-frontend" class="tags">#frontend</label>
+							
+							<input name="edit-taskTag" id="edit-backend" class="backend" type="checkbox" value="backend">
+							<label for="edit-backend" class="tags">#backend</label>
+							
+							<input name="edit-taskTag" id="edit-api" class="api" type="checkbox" value="api">
+							<label for="edit-api" class="tags">#API</label>
+							
+							<input name="edit-taskTag" id="edit-database" class="database" type="checkbox" value="database">
+							<label for="edit-database" class="tags">#database</label>
+							
+							<input name="edit-taskTag" id="edit-framework" class="framework" type="checkbox" value="framework">
+							<label for="edit-framework" class="tags">#framework</label>
+							
+							<input name="edit-taskTag" id="edit-testing" class="testing" type="checkbox" value="testing">
+							<label for="edit-testing" class="tags">#testing</label>
+							
+							<input name="edit-taskTag" id="edit-ui" class="ui" type="checkbox" value="ui">
+							<label for="edit-ui" class="tags">#UI</label>
+							
+							<input name="edit-taskTag" id="edit-ux" class="ux" type="checkbox" value="ux">
+							<label for="edit-ux" class="tags">#UX</label>
+						</td>
+					</tr>
+
+					<!--Priority Select-->
+					<tr id="priority"></tr>
+					<tr><th>priority:</th>
+						<td>
+							<input name="edit-taskPriority" id="edit-LOW" class="low" type="radio" value="LOW" checked="checked">
+							<label for="edit-LOW">LOW</label>
+							
+							<input name="edit-taskPriority" id="edit-MEDIUM" class="medium" type="radio" value="MEDIUM">
+							<label for="edit-MEDIUM">MEDIUM</label>
+
+							<input name="edit-taskPriority" id="edit-IMPORTANT" class="important" type="radio" value="IMPORTANT">
+							<label for="edit-IMPORTANT">IMPORTANT</label>
+
+							<input name="edit-taskPriority" id="edit-URGENT" class="urgent" type="radio" value="URGENT">
+							<label for="edit-URGENT">URGENT</label>
+						</td>
+					</tr>
+					
+					<!-- Production Stage Select -->
+					<tr id="production"></tr>
+					<tr><th>production:</th>
+						<td>
+							<input name="edit-taskProductionStage" id="edit-PLANNING" type="radio" value="PLANNING" checked="checked">
+							<label for="edit-PLANNING">PLANNING</label>
+							
+							<input name="edit-taskProductionStage" id="edit-DEVELOPMENT" type="radio" value="DEVELOPMENT">
+							<label for="edit-DEVELOPMENT">DEVELOPMENT</label>
+	
+							<input name="edit-taskProductionStage" id="edit-TESTING" type="radio" value="TESTING">
+							<label for="edit-TESTING">TESTING</label>
+	
+							<input name="edit-taskProductionStage" id="edit-INTEGRATION" type="radio" value="INTEGRATION">
+							<label for="edit-INTEGRATION">INTEGRATION</label>
+						</td>
+					</tr>
+
+				<!--Assignee Select-->
+				<tr id="assignee"></tr>
+				<tr>
+					<th><label for="edit-assignee">assignee:</label></th>
+					
+					<td>
+						<input class="dropdown" list="team" id="edit-assignee" placeholder="enter name"></input>
+						<datalist id="team">
+							<option value="Tye">Tye</option> 
+							<option value="Audrey">Audrey</option>
+							<option value="Jun">Jun</option> 
+							<!-- TODO: Need to add js to generate list of team members -->
+						</datalist>
+					</td>
+				</tr>
+
+					<!--Story Point Slider-->
+					<tr id="storyPoints"></tr>
+					<tr><th><label for="edit-storyPointsSlider">story points:</label></th>
+						<td>
+							<div id="edit-slider" class="storyPointsBG">
+								<div class="sliderContainer">
+									<div class="sliderTrack">&nbsp</div>
+									<input type="range" min="0" max="10" step="1" name="edit-storyPoints" id="edit-storyPointsSlider" oninput="updateSlider(this.value, `edit-slider`)">
+								</div>
+								<div class="storyPointsNum">
+									<h5 class="sliderValue">5</h5>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+				<footer class="buttonContainer" id="modal">
+					<!--Submit/Cancel Buttons-->
+					<button class="icon-btn btn-primary" onclick="saveEditTask(`./product-backlog.html`)" title="Submit Edits">
+						<i class="fa-solid fa-check"></i>
+					</button>
+					
+					<button class="icon-btn btn-destructive" onclick="closeEditTaskModal()" title="Close">
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+				</footer>
+		</div>
+	</div>
+
+    <!-- JavaScript -->
+    <script src="../js/createTask.js"></script> 
+    <script src="../js/productBacklog.js"></script>
+    <script src="../js/editTask.js"></script> 
+    <script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../views.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!--Import Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     
+    <!--Import Icons-->
+    <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+    
+    <style>
+        body, html {
+            background-color: #0e0f12;
+        }
+    </style>
+    <title>Sprint View</title>
+</head>
+<body class="with-sidebar">
+    <div class="container-full">
+
+        <nav class="sidebar">
+            <div class="icon-border">
+                <i class="fa-solid fa-user" title="View Profile" onclick="window.location.href='./user-details.html'"></i>
+            </div>
+            <div class="icon-border">
+                <i class="fa-solid fa-layer-group" title="Product Backlog" onclick="window.location.href='./product-backlog.html'"></i>
+            </div>
+            <div class="icon-border selected-icon">
+                <i class="fa-regular fa-calendar" title="Sprint View" ></i>
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket" title="Log Out" onclick="window.location.href='./login.html'" style="margin-top: auto;"></i>
+        </nav>
+
+        <div class="container-top">
+            <h1>Sprint View</h1>
+
+            <div class="sort-wrapper">
+                <button class="icon-btn btn-primary" onclick="showCreateSprintModal()" title="New Sprint" style="margin-left: 0;">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <button class="icon-btn btn-primary" onclick="window.location.href='./archived-sprint.html'" title="Sprint Archive">
+                    <i class="fa-solid fa-box-archive"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="wrapper">            
+            <div class="grid" id="sprintID">
+            </div>
+        </div>
+        
+        <script src="../js/sprintView.js"></script>
+    </div>
+
+    <div id="createSprintModal" class="modal">
+        <div class="container">
+            <div class="content-wrapper">
+
+                <!--Task Name-->
+                <h1><input class="taskName" id="sprintName" type="text" name="sprintName" placeholder="Sprint Name" ></h1>
+            
+                <!--Task Description-->
+                <textarea rows="5" id="sprintDescription" name="sprintDescription" placeholder="enter description" ></textarea>
+            
+                <table>
+                    <!-- Start Date -->
+                    <tr id="startDate"></tr>
+                    <tr>
+                    <th>start date:</th>
+                    <td>
+                        <input class="date" type="date" id="startDateInput" name="startDate">
+                    </td>
+                    </tr>
+            
+                    <!-- End Date -->
+                    <tr id="endDate"></tr>
+                    <tr>
+                    <th>end date:</th>
+                    <td>
+                        <input class="date" type="date" id="endDateInput" name="endDate">
+                    </td>
+                    </tr>
+                </table>
+            </div>
+            <footer class="buttonContainer" id="modal">
+                <!--Submit/Cancel Buttons-->
+                <button class="icon-btn btn-primary " onclick="createSprint()" title="Create Sprint">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                
+                <button class="icon-btn btn-destructive" onclick="closeCreateSprintModal()" title="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/createSprint.js"></script> 
+    <script src="../js/shared.js"></script> 
+</body>
+

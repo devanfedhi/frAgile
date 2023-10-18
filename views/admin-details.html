@@ -1,0 +1,146 @@
+<head>
+    <!-- <link href="bootstrap.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../views.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+        <!--Import Icons-->
+        <script src="https://kit.fontawesome.com/5335e472ee.js" crossorigin="anonymous"></script>
+        
+        <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stored User Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Password</th>
+                <th>Remove User</th>
+            </tr>
+        </thead>
+        <tbody id="userList">
+        </tbody>
+    </table>
+
+    <div>
+        <h2>Register A New User</h2>
+        <form style="text-align: left">
+            <label for="register-username">Username:</label>
+            <input type="text" class="rounded-textbox" id="register-username" name="register-username" required>
+            
+            <label for="register-fullname">Full name:</label>
+            <input type="text" class="rounded-textbox" id="register-fullname" name="register-fullname" required>
+            
+            <label for="register-email">Email:</label>
+            <input type="text" class="rounded-textbox" id="register-email" name="register-email" required>
+            
+            <label for="register-role">Role:</label>
+            <td>
+                <input class="dropdown" list="team" id="register-role" placeholder="Enter Role"></input>
+                <datalist id="team">
+                    <option value="Scrum Master">Scrum Master</option> 
+                    <option value="Product Owner">Product Owner</option> 
+                    <option value="Proxy Product Owner">Proxy Product Owner</option> 
+                    <option value="Developer">Developer</option> 
+                    <!-- Need to add js to generate list of team members -->
+                </datalist>
+                
+            </td>
+            
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="register-password" required>
+            
+            <button type="button" class="btn-primary" onclick="register()">Register</button>
+            
+            
+        </form>
+    </div>
+
+    <div id="edit-user-form">
+        <h2>Edit User Details</h2>
+        <form style="text-align: left;">
+            <label for="login-username">Username:</label>
+            <input type="text" class="rounded-textbox" id="login-username" name="login-username" required>
+
+            <label for="edit-username">Edit Username:</label>
+            <input type="text" class="rounded-textbox" id="edit-username" name="edit-username" required>
+
+            <label for="edit-fullname">Edit Full Name:</label>
+            <input type="text" class="rounded-textbox" id="edit-fullname" name="edit-fullname" required>
+
+            <label for="edit-email">New Email:</label>
+            <input type="text" class="rounded-textbox" id="edit-email" name="edit-email" required>
+
+            <label for="edit-role">Role:</label>
+            <td>
+                <input class="dropdown" list="team" id="edit-role" placeholder="Enter Role"></input>
+                <datalist id="team">
+                    <option value="Scrum Master">Scrum Master</option> 
+                    <option value="Product Owner">Product Owner</option> 
+                    <option value="Proxy Product Owner">Proxy Product Owner</option> 
+                    <option value="Developer">Developer</option> 
+                    
+                    <!-- Need to add js to generate list of team members -->
+                </datalist>
+                
+            </td>
+            
+            <label for="edit-password">New Password:</label>
+            <input type="password" id="edit-password" name="edit-password" required>
+            
+            <button type="button" class="btn-primary" onclick="edit()">Save Changes</button>
+        </form>
+    </div>
+    <div>
+        <button type="button" class="btn-primary" onclick="window.location.href='./admin-home.html'">Return Home</button>
+    </div>
+    <script src="../js/adminDetails.js"></script>
+    <button type="button" class="btn-destructive" onlick="clear_users()">Clear Users</button>
+    <button type="button" class="btn-destructive" onclick="clear_admins()">Clear Admins</button>
+
+    <script>
+        
+        function clear_users(){
+            localStorage.removeItem("userStorage")
+            localStorage.setItem("userStorage", JSON.stringify([]));
+            window.location.href=`../views/admin-details.html`;
+        }
+
+        function clear_admins(){
+            localStorage.removeItem("adminStorage")
+            
+
+            localStorage.setItem("adminStorage", JSON.stringify([]));
+            let admin = {
+                username: 'nisaldesilva',
+                email: 'nisal.desilva1@monash.edu',
+                fullname: 'Nisal De Silva',
+                role: 'Admin',
+                password: 'monash',
+            }
+
+            const adminAdd = JSON.parse(localStorage.getItem("adminStorage"));
+            adminAdd.push(admin);
+            localStorage.setItem('adminStorage', JSON.stringify(adminAdd));
+
+            window.location.href=`../views/admin-details.html`;
+        }
+
+    </script>
+</body>
+</html>
